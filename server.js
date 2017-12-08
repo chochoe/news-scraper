@@ -13,8 +13,8 @@ var app = express();
 
 
 // set up the HBS view engine
-app.engine('hbs', hbs({defaultLayout: 'main', extname: 'hbs', partialsDir: [__dirname + '/views/partials']}));
-app.set('view engine', 'hbs');
+app.engine('handlebars', hbs({defaultLayout: 'main', extname: 'handlebars'}));
+app.set('view engine', 'handlebars');
 
 
 // Use morgan for debug logging
@@ -40,5 +40,5 @@ var port = process.env.PORT || 3000;
 
 app.listen(port, function()
 {
-  console.log('Running on port: ' + port);
+  console.log('Server is running on port: ' + port);
 });

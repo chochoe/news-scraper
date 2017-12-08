@@ -89,7 +89,7 @@ $(document).ready(function ()
                     })
 
                 .fail(function () {
-                    console.log("Cannot get notes");
+                    console.log("Unable to get notes");
                 });
 
         

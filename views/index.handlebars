@@ -1,7 +1,6 @@
-
  <nav>
-    <div>
-      <p>Web Scraped News!</p>
+    <div class="nav-wrapper #c2185b pink darken-2">
+      <a href="#" class="brand-logo #1e88e5 blue darken-1">Web Scraped News!</a>
       <ul class = "right">
 
         <li>
@@ -24,11 +23,11 @@
             {{#each articles}}
             <div class=row>
 
-                <div class="col-sm-8">
+                <div class="col s8">
                     <a href="{{this.link}}" class="collection-item blue-text" target="_blank">{{this.title}}</a>
                 </div>
-                <div class="col-sm-4">
-                    <button class="noteButton waves-effect waves-light btn-flat blue" id="{{this._id}}">Add Note</button>
+                <div class="col s4">
+                    <button class="noteButton waves-effect waves-light btn-flat blue" id="{{this._id}}">Add Comment</button>
                 </div>
 
             </div>
@@ -49,9 +48,9 @@
     
     <div class="modal-footer">
         <form name="noteForm" id="noteForm">
-                    <input required placeholder="Enter a note here" type="text" name="noteText" id="noteText">
+                    <input required placeholder="Enter a comment here" type="text" name="noteText" id="noteText">
             <button class="btn green left" type="submit" id="noteButton">
-                Post Note!
+                Post Comment!
             </button>
             <a href="/" class="modal-action modal-close waves-effect waves-light btn-flat">Close</a>
         </form>

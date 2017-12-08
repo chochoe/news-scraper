@@ -16,7 +16,7 @@ function scrapedWeb(callback)
   request(website, function(error, response, html)
     
   {
-    if (error) console.log("Error Scraping", error);
+    if (error) console.log("Scraping Error", error);
 
     // Then, we load that into cheerio and save it to $ for a shorthand selector
     var $ = cheerio.load(html);

@@ -1,3 +1,4 @@
+// dependencies
 var express = require('express');
 var router = express.Router();
 var Article = require('../models/Article');
@@ -42,7 +43,7 @@ router.get('/note/:id', function(request, response)
 	Article.findOne({_id: request.params.id})
 		.populate("note")
 		.exec(function(error, doc) {
-			if (error) console.log("error getting notes", error);
+			if (error) console.log("Error getting notes", error);
 
 			response.send(doc.note);
 			
@@ -76,7 +77,7 @@ router.post('/deleteNote/:id', function(request, response)
 	
 	Note.findByIdAndRemove({_id: request.params.id}, function(error) 
 	{
-		if (error) console.log('error deleting note', error);
+		if (error) console.log('Error deleting note', error);
 		response.send();
 	});
 })
