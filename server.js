@@ -1,54 +1,44 @@
+// Dependencies
 var express = require("express");
 var bodyParser = require("body-parser");
 var logger = require("morgan");
-var mongoose = require("mongoose");
+var hbs = require('express-handlebars');
 
-// Our scraping tools
-// Axios is a promised-based http library, similar to jQuery's Ajax method
-// It works on the client and on the server
-var request = require("request");
-var cheerio = require("cheerio");
-
-// Require all models
-// var db = require("./models");
-
-var PORT = 3000;
+// Require the routes and use them
+var routes = require('./routes/routes');
 
 // Initialize Express
 var app = express();
 
-// Configure middleware
-var exphbs = require("express-handlebars");
 
-app.engine("handlebars", exphbs({ defaultLayout: "main" }));
-app.set("view engine", "handlebars");
 
-// Use morgan logger for logging requests
+// set up the HBS view engine
+app.engine('hbs', hbs({defaultLayout: 'main', extname: 'hbs', partialsDir: [__dirname + '/views/partials']}));
+app.set('view engine', 'hbs');
+
+
+// Use morgan for debug logging
 app.use(logger("dev"));
-// Use body-parser for handling form submissions
-app.use(bodyParser.urlencoded({ extended: false }));
-// Use express.static to serve the public folder as a static directory
-app.use(express.static("public"));
 
-// Set mongoose to leverage built in JavaScript ES6 Promises
-// Connect to the Mongo DB
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
-mongoose.Promise = Promise;
-mongoose.connect(MONGODB_URI, {
-  useMongoClient: true
+// set up body-parser
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+	extended: false
+}));
+
+// set the public static directory
+app.use(express.static('public'));
+
+// Import routes
+app.use('/', routes);
+
+
+
+// Launch App
+var port = process.env.PORT || 3000;
+
+
+app.listen(port, function()
+{
+  console.log('Running on port: ' + port);
 });
-
-app.use("/", function(req, res) {
-	res.render("index.handlebars")
-})
-
-app.listen(PORT, function() {
-  console.log("App running on port " + PORT + "!");
-});
-
-//build index.handlebars
-//get articles
-//display articles
-//save articles to mongo
-//write comments
-//save comments
